@@ -12,11 +12,6 @@ model User {
 	id        String   @id @default(uuid())
 	name      String
 	posts     Post[]
-	comments  Comment[]
-	likedBy   User[]   @relation("UserLikedBy", references: [id])
-	liked     User[]   @relation("UserLiked", references: [id])
-	likedPost Post[]   @relation("PostLiked", references: [id])
-	likedComment Comment[] @relation("CommentLiked", references: [id])
 }
 
 model Post {
@@ -25,21 +20,4 @@ model Post {
 	content   String
 	author    User      @relation(fields: [authorId], references: [id])
 	authorId  String
-	likedBy   User[]    @relation("PostLikedBy", references: [id])
-	liked     User[]    @relation("PostLiked", references: [id])
-	likedPost Post[]    @relation("PostLiked", references: [id])
-	likedComment Comment[] @relation("CommentLiked", references: [id])
-}
-
-model Comment {
-	id        String    @id @default(uuid())
-	content   String
-	author    User      @relation(fields: [authorId], references: [id])
-	authorId  String
-	post      Post      @relation(fields: [postId], references: [id])
-	postId    String
-	likedBy   User[]    @relation("CommentLikedBy", references: [id])
-	liked     User[]    @relation("CommentLiked", references: [id])
-	likedPost Post[]    @relation("PostLiked", references: [id])
-	likedComment Comment[] @relation("CommentLiked", references: [id])
 }
