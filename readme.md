@@ -22,3 +22,15 @@ In your code at some microservice:
 import { PrismaClient } from '@your-npm-scope/prisma-client'
 const db = new PrismaClient()
 ```
+
+## Bundling
+
+If you're using a bundler, you need to make sure your package is not bundled as it will break the Prisma query engine(s). Either use the bundler config or make a script that copies over the package after bundling.
+
+If you use Next.js v15, you can exclude your package from bundling in the `next.config.js`:
+
+```ts
+const nextConfig = {
+    serverExternalPackages: ["YOUR_PACKAGE"],
+};
+```
